@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { AllRoutesStack } from "./AllRoutesStack";
+import { ContriesStack } from "./CountriesStack";
+import { QRStack } from "./QRStack";
+import { SplashStack } from "./SplashStack";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                initialRouteName='Ekran5'
+                screenOptions={{
+                    tabBarHideOnKeyboard: true
+                }}
+            >
+                <Tab.Screen name="Splash" component={SplashStack} options={{ headerShown: false,
+                tabBarStyle: {
+                        display: 'none'
+                    } }} />
+
+                <Tab.Screen name="ContriesStack" component={ContriesStack} options={{
+                    headerShown: false,
+                    
+                }} />
+                <Tab.Screen name="AllRoutesStack" component={AllRoutesStack} options={{ headerShown: false }} />
+                <Tab.Screen name="QR" component={QRStack} options={{ headerShown: false }} />
+
+            </Tab.Navigator>
+        </NavigationContainer>
+
+    )
+}
